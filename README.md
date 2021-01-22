@@ -1,0 +1,1 @@
+# Ansible-in-docker-image
