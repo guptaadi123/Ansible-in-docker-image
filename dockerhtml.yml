@@ -1,0 +1,25 @@
+- hosts: docker
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_prompt:
+  - name: html_file
+    private: no
+    prompt: "enter file name"
+  - name: cont
+    private: no
+    prompt: "enter content"
+
+  tasks:
+  - name: Installing webserver
+    apt:
+      name: apache2
+      state: present
+  - name: Start serivce
+    service:
+      name: apache2
+      state: started
+  - name: create html file
+    copy:
+      content: "{{cont}}"
+      dest: "/var/www/html/{{html_file}}.html"      
